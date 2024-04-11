@@ -3,7 +3,6 @@ import { program } from "commander";
 import { globalOptions, login, logout } from "./whatsapp";
 import { listGroups, me, mutateGroup, sendFile, sendImage, sendLocation, sendMessage, sendPoll } from "./commands";
 import { bootstrap } from "global-agent";
-
 const packageJson = require("../package.json");
 
 program.name("bileyes").version(packageJson.version);
@@ -20,7 +19,7 @@ function increaseVerbosity(_: string, previous: string) {
 		globalOptions.logLevel = "trace";
 		return "trace";
 	}
-}
+};
 
 program.option("-v, --verbose", "Increase verbosity", increaseVerbosity, "silent");
 program.on("option:cache", (folder) => (process.env.BILEYES_CACHE_FOLDER = folder));
@@ -86,7 +85,7 @@ function configureCommands() {
 		.allowUnknownOption()
 		.description("Remove group participant")
 		.action((groupId, phoneNumber) => mutateGroup(groupId, phoneNumber, "remove"));
-}
+};
 
 configureCommands();
 program.addHelpText(

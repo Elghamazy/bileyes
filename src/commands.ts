@@ -48,7 +48,7 @@ export async function sendMessage(
 			terminate(socket, 3);
 		}
 	});
-}
+};
 
 export async function sendImage(recipient: string, path: string, options: { caption: string | undefined }) {
 	checkValidFile(path);
@@ -62,7 +62,7 @@ export async function sendImage(recipient: string, path: string, options: { capt
 			await sendImageHelper(socket, whatsappId, path, options);
 		}
 	});
-}
+};
 
 export async function sendFile(
 	recipient: string,
@@ -83,7 +83,7 @@ export async function sendFile(
 			await sendFileHelper(socket, whatsappId, path, options);
 		}
 	});
-}
+};
 
 export async function sendLocation(recipient: string, latitude: string, longitude: string) {
 	checkLoggedIn();
@@ -104,7 +104,7 @@ export async function sendLocation(recipient: string, latitude: string, longitud
 			terminate(socket, 3);
 		}
 	});
-}
+};
 
 export async function sendPoll(
 	recipient: string,
@@ -121,7 +121,7 @@ export async function sendPoll(
 	if (options.selectable < 0 || options.selectable > options.item.length) {
 		signale.error(`Selectable should be >= 0 and <= ${options.item.length}`);
 		process.exit(1);
-	}
+	};
 	checkLoggedIn();
 	const socket = await initWASocket();
 	socket.ev.on("connection.update", async (update) => {
@@ -140,7 +140,7 @@ export async function sendPoll(
 			terminate(socket, 3);
 		}
 	});
-}
+};
 
 export async function me() {
 	checkLoggedIn();
@@ -154,7 +154,7 @@ export async function me() {
 			terminate(socket);
 		}
 	});
-}
+};
 
 export async function listGroups() {
 	checkLoggedIn();
@@ -169,7 +169,7 @@ export async function listGroups() {
 			terminate(socket);
 		}
 	});
-}
+};
 
 export async function mutateGroup(groupId: string, phoneNumber: string, operation: "add" | "remove") {
 	checkLoggedIn();
@@ -187,4 +187,4 @@ export async function mutateGroup(groupId: string, phoneNumber: string, operatio
 			terminate(socket);
 		}
 	});
-}
+};

@@ -22,18 +22,18 @@
     ]
   },
   "bin": {
-    "bileyes": "dist/index.js"
+    "bileyes": "lib/dist/bundle.min.js"
   },
-  "main": "/lib/dist/index.js",
+  "main": "/lib/dist/bundle.min.js",
   "scripts": {
-    "build": "tsc && chmod a+x ./lib/dist/index.js",
+    "build": "tsc && chmod a+x ./dist/index.js && terser dist/*.js -o lib/dist/bundle.min.js",
     "test": "jest",
-    "start": "yarn build && node ./lib/dist/index.js",
+    "start": "yarn build && node ./lib/dist/bundle.min.js",
     "dist": "yarn build && yarn dist:build && yarn dist:pkg:linux && yarn dist:pkg:windows && yarn dist:pkg:macos && yarn dist:bundle:macos",
-    "dist:build": "ncc build lib/dist/index.js -o dist-ncc",
-    "dist:pkg:linux": "pkg -c pkg-linux.json -o binaries/bileyes-linuxstatic dist-ncc/index.js",
-    "dist:pkg:windows": "pkg -c pkg-win-x64.json -o binaries/bileyes dist-ncc/index.js",
-    "dist:pkg:macos": "pkg -t node16-macos-x64 -o binaries/bileyes dist-ncc/index.js",
+    "dist:build": "ncc build lib/dist/bundle.min.js -o dist-ncc",
+    "dist:pkg:linux": "pkg -c pkg-linux.json -o binaries/bileyes-linuxstatic dist-ncc/bundle.min.js",
+    "dist:pkg:windows": "pkg -c pkg-win-x64.json -o binaries/bileyes dist-ncc/bundle.min.js",
+    "dist:pkg:macos": "pkg -t node16-macos-x64 -o binaries/bileyes dist-ncc/bundle.min.js",
     "dist:bundle:macos": "cd binaries && tar czf bileyes-macos.tgz bileyes"
   },
   "license": "ISC",
@@ -59,6 +59,7 @@
     "jest": "^29.4.2",
     "pkg": "^5.8.1",
     "semantic-release": "^20.0.2",
+    "terser": "^5.30.3",
     "ts-jest": "^29.0.5",
     "typescript": "^4.9.3"
   }

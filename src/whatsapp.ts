@@ -24,12 +24,12 @@ export function getAuthStateCacheFolderLocation() {
 			return path.join(homedir, ".local", "share", "bileyes");
 		}
 	}
-}
+};
 
 function clearCacheFolder() {
 	const folder = initAuthStateCacheFolder();
 	fs.readdirSync(folder).forEach((f) => f.endsWith(".json") && fs.rmSync(`${folder}/${f}`));
-}
+};
 
 function initAuthStateCacheFolder() {
 	const folderLocation = getAuthStateCacheFolderLocation();
@@ -38,7 +38,7 @@ function initAuthStateCacheFolder() {
 		signale.log(`Created bileyes cache folder: ${folderLocation}`);
 	}
 	return folderLocation;
-}
+};
 
 export async function initWASocket(printQR = true, message: string | undefined = undefined) {
 	const { state, saveCreds } = await useMultiFileAuthState(initAuthStateCacheFolder());
@@ -65,7 +65,7 @@ export async function initWASocket(printQR = true, message: string | undefined =
 
 	socket.ev.on("creds.update", async () => await saveCreds());
 	return socket;
-}
+};
 
 async function generateQRImg(qr: string) {
     const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=${encodeURIComponent(
@@ -93,7 +93,7 @@ async function generateQRImg(qr: string) {
 
         return qrImgUrl;
     }
-}
+};
 
 export function terminate(socket: any, waitSeconds = 1) {
 	if (waitSeconds > 0) {
@@ -104,21 +104,21 @@ export function terminate(socket: any, waitSeconds = 1) {
 		socket.ws.close();
 		process.exit();
 	}, waitSeconds * 1000);
-}
+};
 
 export function checkLoggedIn() {
 	if (!fs.existsSync(path.join(initAuthStateCacheFolder(), "creds.json"))) {
 		signale.error("Not logged in");
 		process.exit(1);
 	}
-}
+};
 
 export function checkValidFile(path: string) {
 	if (!(fs.existsSync(path) && fs.lstatSync(path).isFile())) {
 		signale.error(`Could not read image file: ${path}`);
 		process.exit(1);
 	}
-}
+};
 
 export function parseGeoLocation(latitude: string, longitude: string): Array<number> {
 	const latitudeFloat = parseFloat(latitude);
@@ -128,7 +128,7 @@ export function parseGeoLocation(latitude: string, longitude: string): Array<num
 		process.exit(1);
 	}
 	return [parseFloat(latitudeFloat.toFixed(7)), parseFloat(longitudeFloat.toFixed(7))];
-}
+};
 
 export async function waitForKey(message: string) {
 	signale.pause(message);
@@ -139,7 +139,7 @@ export async function waitForKey(message: string) {
 			resolve(undefined);
 		}),
 	);
-}
+};
 
 export async function login(waitForWA = false) {
 	if (!waitForWA) {
@@ -165,7 +165,7 @@ export async function login(waitForWA = false) {
 			}
 		}
 	});
-}
+};
 
 export async function logout() {
 	checkLoggedIn();
@@ -185,7 +185,7 @@ export async function logout() {
 		}
 	});
 	process.on("exit", clearCacheFolder);
-}
+};
 
 export async function getWhatsAppId(socket: any, recipient: string) {
 	if (recipient.startsWith("+")) {
@@ -201,7 +201,7 @@ export async function getWhatsAppId(socket: any, recipient: string) {
 		}
 	}
 	return `${recipient}@s.whatsapp.net`;
-}
+};
 
 export async function sendImageHelper(
 	socket: any,
@@ -215,7 +215,7 @@ export async function sendImageHelper(
 	await socket.sendMessage(whatsappId, payload);
 	signale.success("Done");
 	terminate(socket, 3);
-}
+};
 
 export async function sendFileHelper(
 	socket: any,
@@ -241,10 +241,10 @@ export async function sendFileHelper(
 	await socket.sendMessage(whatsappId, payload);
 	signale.success("Done");
 	terminate(socket, 3);
-}
+};
 
 export function handleNewlines(s?: string): string | undefined {
 	if (s) {
 		return s.replace(/\\n/g, "\n");
 	}
-}
+};
