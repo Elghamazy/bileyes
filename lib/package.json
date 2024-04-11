@@ -1,6 +1,6 @@
 {
   "name": "bileyes",
-  "version": "0.1.12",
+  "version": "0.1.11",
   "author": "Mohamed.saeed.elghamazy@gmail.com",
   "description": "WhatsApp CLI",
   "release": {
@@ -24,13 +24,12 @@
   "bin": {
     "bileyes": "dist/index.js"
   },
-  "main": "/lib/dist/index.js",
+  "main": "/bileyes/dist/index.js",
   "scripts": {
-    "build": "tsc && chmod a+x ./lib/dist/index.js",
-    "test": "jest",
-    "start": "yarn build && node ./lib/dist/index.js",
+    "build": "tsc && chmod a+x ./bileyes/dist/index.js",
+    "start": "yarn build && node ./bileyes/dist/index.js",
     "dist": "yarn build && yarn dist:build && yarn dist:pkg:linux && yarn dist:pkg:windows && yarn dist:pkg:macos && yarn dist:bundle:macos",
-    "dist:build": "ncc build lib/dist/index.js -o dist-ncc",
+    "dist:build": "ncc build bileyes/dist/index.js -o dist-ncc",
     "dist:pkg:linux": "pkg -c pkg-linux.json -o binaries/bileyes-linuxstatic dist-ncc/index.js",
     "dist:pkg:windows": "pkg -c pkg-win-x64.json -o binaries/bileyes dist-ncc/index.js",
     "dist:pkg:macos": "pkg -t node16-macos-x64 -o binaries/bileyes dist-ncc/index.js",

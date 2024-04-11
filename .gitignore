@@ -4,3 +4,5 @@ node_modules/
 yarn-error.log
 tmp
 binaries/
+.replit
+replit.nix
