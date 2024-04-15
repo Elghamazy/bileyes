@@ -1,6 +1,6 @@
 {
   "name": "bileyes",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "author": "Mohamed.saeed.elghamazy@gmail.com",
   "description": "WhatsApp CLI",
   "release": {
@@ -22,16 +22,16 @@
     ]
   },
   "bin": {
-    "bileyes": "dist/index.min.js"
+    "bileyes": "dist/index.js"
   },
-  "main": "/dist/index.min.js",
+  "main": "/dist/index.js",
   "scripts": {
-    "start": "node ./dist/bundle.min.js",
+    "start": "node ./dist/index.js",
     "dist": "yarn dist:build && yarn dist:pkg:linux && yarn dist:pkg:windows && yarn dist:pkg:macos && yarn dist:bundle:macos",
-    "dist:build": "ncc build bileyes/dist/bundle.min.js -o dist-ncc",
-    "dist:pkg:linux": "pkg -c pkg-linux.json -o binaries/bileyes-linuxstatic dist-ncc/bundle.min.js",
-    "dist:pkg:windows": "pkg -c pkg-win-x64.json -o binaries/bileyes dist-ncc/bundle.min.js",
-    "dist:pkg:macos": "pkg -t node16-macos-x64 -o binaries/bileyes dist-ncc/bundle.min.js",
+    "dist:build": "ncc build bileyes/dist/index.js -o dist-ncc",
+    "dist:pkg:linux": "pkg -c pkg-linux.json -o binaries/bileyes-linuxstatic dist-ncc/index.js",
+    "dist:pkg:windows": "pkg -c pkg-win-x64.json -o binaries/bileyes dist-ncc/index.js",
+    "dist:pkg:macos": "pkg -t node16-macos-x64 -o binaries/bileyes dist-ncc/index.js",
     "dist:bundle:macos": "cd binaries && tar czf bileyes-macos.tgz bileyes"
   },
   "license": "ISC",
